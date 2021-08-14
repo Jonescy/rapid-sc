@@ -1,0 +1,32 @@
+{
+    "name": "cc_doge",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@openzeppelin/contracts": "^4.2.0",
+        "@typechain/hardhat": "^2.3.0",
+        "@types/mocha": "^9.0.0",
+        "@types/node": "^16.6.1",
+        "hardhat": "^2.6.0",
+        "ts-node": "^10.2.0",
+        "typescript": "latest"
+    },
+    "devDependencies": {
+        "@nomiclabs/hardhat-ethers": "^2.0.2",
+        "@nomiclabs/hardhat-waffle": "^2.0.1",
+        "@typechain/ethers-v5": "^7.0.1",
+        "chai": "^4.3.4",
+        "ethereum-waffle": "^3.4.0",
+        "ethers": "^5.4.4",
+        "hardhat-typechain": "^0.3.5",
+        "ts-generator": "^0.1.1",
+        "typechain": "^5.1.2"
+    }
+}
