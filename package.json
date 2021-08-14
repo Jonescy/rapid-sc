@@ -16,16 +16,16 @@
         "@types/node": "^16.6.1",
         "hardhat": "^2.6.0",
         "ts-node": "^10.2.0",
-        "typescript": "latest"
+        "typescript": "^4.3.5"
     },
     "devDependencies": {
-        "@nomiclabs/hardhat-ethers": "^2.0.2",
+        "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.10",
         "@nomiclabs/hardhat-waffle": "^2.0.1",
         "@typechain/ethers-v5": "^7.0.1",
         "chai": "^4.3.4",
         "ethereum-waffle": "^3.4.0",
         "ethers": "^5.4.4",
-        "hardhat-typechain": "^0.3.5",
+        "hardhat-deploy": "^0.8.11",
         "ts-generator": "^0.1.1",
         "typechain": "^5.1.2"
     }

@@ -1,25 +1,9 @@
-import {HardhatUserConfig, task} from "hardhat/config";
+import {HardhatUserConfig} from "hardhat/types";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
-
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
+import "hardhat-deploy";
 
 
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-    const accounts = await hre.ethers.getSigners();
-
-    for (const account of accounts) {
-        console.log(account.address);
-    }
-});
-
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
-
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
 const INFURA_API_KEY = "248341ea5db74a47ae14a7209a3378da";
 const config: HardhatUserConfig = {
     defaultNetwork: "hardhat",
@@ -32,8 +16,9 @@ const config: HardhatUserConfig = {
                     optimizer: {
                         enabled: true,
                         runs: 200
-                    }
+                    },
                 },
+
             },
             {
                 version: "0.7.6",
@@ -53,29 +38,34 @@ const config: HardhatUserConfig = {
                     }
                 },
             }
-        ]
+        ],
+
+    },
+    typechain: {
+        outDir: 'typechain',
+        target: 'ethers-v5',
     },
     networks: {
         hardhat: {},
         ethmain: {
-            url: `wss://mainnet.infura.io/ws/v3/${INFURA_API_KEY}`,
+            url: `https://mainnet.infura.io/ws/v3/${INFURA_API_KEY}`,
         },
 
         rinkeby: {
-            url: `wss://rinkeby.infura.io/ws/v3/${INFURA_API_KEY}`,
+            url: `https://rinkeby.infura.io/ws/v3/${INFURA_API_KEY}`,
             chainId: 4,
-            // accounts: [process.env.PVK.toString()],
+            accounts: [`0x${process.env.PVK}`],
         },
         hecotest: {
-            url: "wss://ws-testnet.huobichain.com",
+            url: "https://http-testnet.hecochain.com",
             chainId: 256,
-            accounts: {
-                mnemonic: process.env.MNO2,
-            },
+            accounts: [`0x${process.env.PVK}`],
+            gas: 2100000,
+            gasPrice: 8000000000
         },
         hecomain: {
-            url: "wss://ws-mainnet-node.huobichain.com",
-            chainId: 128,
+            url: "https://http-mainnet.hecochain.com",
+            // chainId: 128,
             accounts: {
                 mnemonic: process.env.MNO2,
             },
@@ -95,14 +85,19 @@ const config: HardhatUserConfig = {
             },
         },
     },
+    namedAccounts:{
+        deployer:0,
+        tokenOwner:1,
+    },
     paths: {
         sources: "./contracts",
         tests: "./test",
         cache: "./cache",
-        artifacts: "./abis"
+        artifacts: "./artifacts"
     },
     mocha: {
-        timeout: 20000,
+        timeout: 0,
     }
 };
+
 export default config;
