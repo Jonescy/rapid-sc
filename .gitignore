@@ -7,4 +7,7 @@ abis
 .idea
 .vscode
 .env*
+typechain
+.DS_Store
+
 

@@ -2,13 +2,16 @@ import {HardhatUserConfig} from "hardhat/types";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-deploy";
+import "@nomiclabs/hardhat-solhint";
+import "@nomiclabs/hardhat-etherscan";
+import "hardhat-gas-reporter";
+import "hardhat-watcher";
 
 
 const INFURA_API_KEY = "248341ea5db74a47ae14a7209a3378da";
 const config: HardhatUserConfig = {
     defaultNetwork: "hardhat",
     solidity: {
-
         compilers: [
             {
                 version: "0.8.4",
@@ -73,9 +76,7 @@ const config: HardhatUserConfig = {
         bsctest: {
             url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
             chainId: 97,
-            accounts: {
-                mnemonic: process.env.MNO2,
-            },
+            accounts: [`0x${process.env.PVK}`],
         },
         bscmain: {
             url: "https://bsc-dataseed4.binance.org",
@@ -97,7 +98,31 @@ const config: HardhatUserConfig = {
     },
     mocha: {
         timeout: 0,
-    }
+    },
+    etherscan: {
+        apiKey: "J5YQDEZWE4RDNF66F4SDX6V7RATP7SWS4V",
+    },
+    gasReporter: {
+        enabled: true,
+        currency: "USD",
+        coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+        excludeContracts: ["contracts/mocks/", "contracts/libraries/"],
+        gasPriceApi: "https://api.bscscan.com/api?module=stats&action=eth_gasPrice",
+    },
+    watcher: {
+        compilation: {
+            tasks: ["compile"],
+            files: ["contracts/**/*.sol"],
+            verbose: true,
+        },
+        ci: {
+            tasks: [
+                'clean',
+                { command: 'compile', params: { quiet: true } },
+                { command: 'test', params: { noCompile: true, testFiles: ['./test/*.spec.ts'] } },
+            ],
+        },
+    },
 };
 
 export default config;

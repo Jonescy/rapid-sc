@@ -1,6 +1,7 @@
 import {HardhatRuntimeEnvironment} from 'hardhat/types';
 import {DeployFunction} from 'hardhat-deploy/types';
-import fs from "fs";
+import {Greeter} from "../typechain";
+
 // import {parseEther} from 'ethers/lib/utils';
 
 const df: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
