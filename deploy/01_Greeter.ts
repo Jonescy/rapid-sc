@@ -1,6 +1,5 @@
 import {HardhatRuntimeEnvironment} from 'hardhat/types';
 import {DeployFunction} from 'hardhat-deploy/types';
-import {Greeter} from "../typechain";
 
 // import {parseEther} from 'ethers/lib/utils';
 
