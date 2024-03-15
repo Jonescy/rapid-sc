@@ -11,7 +11,7 @@ const df: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
     await deploy('Greeter', {
         from: deployer,
-        args: ["jones zi"],
+        args: ["Hello hardhat!"],
         log: true,
     });
 
